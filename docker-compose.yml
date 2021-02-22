@@ -1,0 +1,78 @@
+version: '3.5'
+services:
+  server:
+    build:
+      context: ./server
+    hostname: server
+    container_name: server
+    environment:
+      - SPRING_APPLICATION_NAME=server
+      - SPRING_PROFILES_ACTIVE=dev
+    command: ["mvn", "spring-boot:run"]
+    ports:
+      - "8761:8761"
+    expose:
+      - "8761"
+    volumes:
+      - maven-home:/root/.m2
+    networks:
+      services-network:
+        aliases:
+          - server
+
+  user-service:
+    build:
+      context: ./user-service
+    hostname: user-service
+    container_name: user-service
+    environment:
+      - SPRING_APPLICATION_NAME=user-service
+      - SPRING_PROFILES_ACTIVE=dev
+    command: ["mvn", "spring-boot:run"]
+    ports:
+      - "8085:8085"
+    volumes:
+      - maven-home:/root/.m2
+    networks:
+      services-network:
+        aliases:
+          - user-service
+    depends_on:
+      - server
+
+  gateway:
+    build:
+      context: ./gateway
+    hostname: gateway
+    container_name: gateway
+    environment:
+      - SPRING_APPLICATION_NAME=gateway
+      - SPRING_PROFILES_ACTIVE=dev
+    command: [ "mvn", "spring-boot:run" ]
+    ports:
+      - "8084:8084"
+    volumes:
+      - maven-home:/root/.m2
+    networks:
+      services-network:
+        aliases:
+          - gateway
+    depends_on:
+      - server
+
+volumes:
+  maven-home:
+
+networks:
+  services-network:
+    name: services-network
+    driver: bridge
+
+
+
+
+
+
+
+
+

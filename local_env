@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e -E -u
+COMMAND=${1:?Command}
+
+function print_help (){
+    echo "$COMMAND is not a valid command"
+    echo ""
+    echo "Commands:"
+    echo "  up        run local development in the background"
+    echo "  stop      stop local development"
+    echo "  rebuild   rebuild backend container and run in the background"
+}
+
+case "$COMMAND" in
+    up)
+        COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up -d
+        ;;
+    stop)
+        docker-compose stop
+        ;;
+    rebuild)
+        COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up -d --build --force-recreate
+        ;;
+    *)
+        print_help
+esac
