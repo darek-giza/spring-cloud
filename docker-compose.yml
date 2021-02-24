@@ -26,6 +26,7 @@ services:
     hostname: user-service
     container_name: user-service
     environment:
+      - SERVICE_CHECK_HTTP=/health
       - SPRING_APPLICATION_NAME=user-service
       - SPRING_PROFILES_ACTIVE=dev
     command: ["mvn", "spring-boot:run"]
@@ -38,7 +39,8 @@ services:
         aliases:
           - user-service
     depends_on:
-      - server
+      app-mongo:
+        condition: service_started
 
   gateway:
     build:
@@ -46,6 +48,7 @@ services:
     hostname: gateway
     container_name: gateway
     environment:
+      - SERVICE_CHECK_HTTP=/health
       - SPRING_APPLICATION_NAME=gateway
       - SPRING_PROFILES_ACTIVE=dev
     command: [ "mvn", "spring-boot:run" ]
@@ -58,7 +61,22 @@ services:
         aliases:
           - gateway
     depends_on:
-      - server
+      server:
+        condition: service_started
+
+  app-mongo:
+    image: 'mongo:4.2.7-bionic'
+    ports:
+    - 27017:27017
+    container_name: app-mongo
+    restart: always
+    depends_on:
+      server:
+        condition: service_started
+    networks:
+      services-network:
+        aliases:
+          - app-mongo
 
 volumes:
   maven-home:
