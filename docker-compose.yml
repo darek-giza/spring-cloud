@@ -34,10 +34,15 @@ services:
       - "8085:8085"
     volumes:
       - maven-home:/root/.m2
+    links:
+      - app-mongo
     networks:
       services-network:
         aliases:
           - user-service
+      db-network:
+        aliases:
+            - user-mongo
     depends_on:
       app-mongo:
         condition: service_started
@@ -74,9 +79,10 @@ services:
       server:
         condition: service_started
     networks:
-      services-network:
+      db-network:
         aliases:
-          - app-mongo
+            - mongo
+
 
 volumes:
   maven-home:
@@ -84,6 +90,9 @@ volumes:
 networks:
   services-network:
     name: services-network
+    driver: bridge
+  db-network:
+    name: db-network
     driver: bridge
 
 

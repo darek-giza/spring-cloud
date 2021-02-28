@@ -1,3 +1,5 @@
+server:
+  port: 8085
 eureka:
   instance:
     prefer-ip-address: true
@@ -11,3 +13,12 @@ eureka:
       zone1: http://server:8761/eureka/
     availability-zones:
       region1: zone1
+spring:
+  application:
+    name: user-service
+  data:
+    mongodb:
+      database: local
+      uri: mongodb://app-mongo:27017/
+      auto-index-creation: true
+

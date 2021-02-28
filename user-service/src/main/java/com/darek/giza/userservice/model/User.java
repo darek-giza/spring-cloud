@@ -1,6 +1,5 @@
 package com.darek.giza.userservice.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,13 +21,13 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = "app_user")
 public class User {
 
     @Id
     private String id;
 
+    @NotBlank(message = "User email is empty or null")
     @Email(message = "Email is not in proper format")
     @Indexed(name = "app_user_email", unique = true)
     private String email;
@@ -37,9 +36,11 @@ public class User {
     @Size(min = 8)
     private String password;
 
+    @NotBlank(message = "User first name is empty or null")
     @Indexed(name = "app_user_first_name")
     private String firstName;
 
+    @NotBlank(message = "User last name is empty or null")
     @Indexed(name = "app_user_last_name")
     private String lastName;
 
