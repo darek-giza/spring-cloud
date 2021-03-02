@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -23,12 +22,17 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User create(User user) {
-        return mongoTemplate.save(user);
+        return mongoTemplate.insert(user);
     }
 
     @Override
-    public Optional<User> findById(String id) {
-        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("id").is(id)), User.class));
+    public User findById(String id) {
+        return mongoTemplate.findOne(Query.query(Criteria.where("id").is(id)), User.class);
+    }
+
+    @Override
+    public User update(User user) {
+        return mongoTemplate.save(user);
     }
 
     @Override
