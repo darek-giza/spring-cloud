@@ -1,8 +1,8 @@
 spring:
   application:
-    name: gateway
+    name: notification-service
 server:
-  port: 8084
+  port: 8086
 eureka:
   instance:
     prefer-ip-address: true
