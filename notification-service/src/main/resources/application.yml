@@ -1,6 +1,15 @@
 spring:
   application:
     name: notification-service
+  mail:
+    username: darek.giza.codete.pl@gmail.com
+    password: Dg@12345
+    host: smtp.gmail.com
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.port: 465
 server:
   port: 8086
 eureka:
@@ -16,3 +25,4 @@ eureka:
       zone1: http://server:8761/eureka/
     availability-zones:
       region1: zone1
+
