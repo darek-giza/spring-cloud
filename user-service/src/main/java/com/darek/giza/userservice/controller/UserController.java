@@ -63,6 +63,6 @@ public class UserController {
     }
 
     public void sendMail(String email){
-        restTemplate.exchange("http://172.19.0.4:8086/sendMail/" + email, HttpMethod.GET, null, String.class);
+        restTemplate.exchange("http://172.19.0.3:8086/sendMail/" + email, HttpMethod.GET, null, String.class);
     }
 }
