@@ -29,7 +29,7 @@ public class MailServiceImpl implements MailService {
     private String host;
 
     @Override
-    public void sendMail(String email) {
+    public boolean sendMail(String email) {
 
         try
         {
@@ -41,6 +41,7 @@ public class MailServiceImpl implements MailService {
         catch (MessagingException | IOException e) {
             throw AppException.internalServerError("Unknown error during sending the email.", e);
         }
+        return true;
     }
 
     public static Session getSession(String username, String password, String host){

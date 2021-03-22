@@ -61,6 +61,8 @@ services:
       - "8084:8084"
     volumes:
       - maven-home:/root/.m2
+    links:
+      - user-service
     networks:
       services-network:
         aliases:
@@ -94,7 +96,7 @@ services:
   app-mongo:
     image: 'mongo:4.2.7-bionic'
     ports:
-      - 27017:27017
+      - 27018:27018
     container_name: app-mongo
     restart: always
     depends_on:
