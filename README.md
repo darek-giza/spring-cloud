@@ -14,8 +14,8 @@ Additional Requirements
 
 #####################################################################
 
-To run the app go to the main directory:
-$ spring-cloud-main/    -- and execute the command
+To run the app go to the main directory:<br>
+$ spring-cloud-main/   <br> -- and execute the command<br>
 $ ./local_env rebuild
 
 All microservices should start up in a few minutes.
@@ -27,12 +27,12 @@ http://172.20.0.3:8085/user
 
 with this Request body:
 
-{
-         "email": "your email address",
-         "password": "fake_password",
-         "firstName": "fake_first_name",
-         "lastName": "fake_last_name"
+{<br>
+         "email": "your email address",<br>
+         "password": "fake_password",<br>
+         "firstName": "fake_first_name",<br>
+         "lastName": "fake_last_name"<br>
   }
 
-Afrer succesfull registration, Notification-service should send welcome message for "your email address".
+After successfully registration, Notification-service should send welcome message for "your email address".
 

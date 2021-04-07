@@ -3,6 +3,8 @@ package com.darek.giza.userservice.controller;
 import com.darek.giza.userservice.model.User;
 import com.darek.giza.userservice.model.UserPartial;
 import com.darek.giza.userservice.service.UserService;
+import com.netflix.discovery.EurekaClient;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,10 @@ public class UserController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    @Lazy
+    private EurekaClient client;
 
     @GetMapping(value = "/user")
     @ResponseStatus(HttpStatus.OK)
@@ -63,6 +69,12 @@ public class UserController {
     }
 
     public void sendMail(String email){
-        restTemplate.exchange("http://172.19.0.3:8086/sendMail/" + email, HttpMethod.GET, null, String.class);
+        try {
+            String ipAddr = client.getNextServerFromEureka("notification-service", false).getIPAddr();
+            String url = "http://" + ipAddr + ":8086/sendMail/" + email;
+            restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

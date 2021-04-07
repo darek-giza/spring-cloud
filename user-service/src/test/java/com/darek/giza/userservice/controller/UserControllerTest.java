@@ -5,6 +5,7 @@ import com.darek.giza.userservice.model.User;
 import com.darek.giza.userservice.model.UserPartial;
 import com.darek.giza.userservice.service.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netflix.discovery.EurekaClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,9 @@ class UserControllerTest {
 
     @MockBean
     private RestTemplate restTemplate;
+
+    @MockBean
+    private EurekaClient eurekaClient;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
