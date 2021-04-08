@@ -14,9 +14,9 @@ Additional Requirements
 
 #####################################################################
 
-To run the app go to the main directory:<br>
-$ spring-cloud-main/   <br> -- and execute the command<br>
-$ ./local_env rebuild
+To run the app go to the main directory of the project:<br>
+$ ../spring-cloud-main/   <br> -- and execute the command<br>
+$  ./local_env rebuild
 
 All microservices should start up in a few minutes.
 
