@@ -20,7 +20,10 @@ $ ./local_env rebuild
 
 All microservices should start up in a few minutes.
 
-Eureka server should start on http://localhost:8761/ - here you can check if all services are running correctly.
+Eureka server should start on http://localhost:8761/ - here you can check if all services are running correctly.<br>
+ - GATEWAY<br>
+ - NOTIFICATION-SERVICE<br>
+ - USER-SERVICE
 
 To add a new user you should make a POST request to the endpoint <br>
 (with the correct ipAddr - check it in eureka server) <br>
