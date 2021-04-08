@@ -1,7 +1,7 @@
 package com.darek.giza.userservice.controller;
 
-import com.darek.giza.userservice.model.User;
-import com.darek.giza.userservice.model.UserPartial;
+import com.darek.giza.userservice.model.user.User;
+import com.darek.giza.userservice.model.user.dto.UserRequest;
 import com.darek.giza.userservice.service.UserService;
 import com.netflix.discovery.EurekaClient;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
@@ -58,8 +58,8 @@ public class UserController {
     @PutMapping(value = "user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") String id,
-                       @RequestBody UserPartial userPartial) {
-        userService.updateById(id, userPartial);
+                       @RequestBody UserRequest userRequest) {
+        userService.updateById(id, userRequest);
     }
 
     @DeleteMapping(value = "user/{id}")
@@ -73,7 +73,7 @@ public class UserController {
             String ipAddr = client.getNextServerFromEureka("notification-service", false).getIPAddr();
             String url = "http://" + ipAddr + ":8086/sendMail/" + email;
             restTemplate.exchange(url, HttpMethod.GET, null, String.class);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

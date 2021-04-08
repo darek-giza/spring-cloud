@@ -1,8 +1,8 @@
 package com.darek.giza.userservice.controller;
 
 
-import com.darek.giza.userservice.model.User;
-import com.darek.giza.userservice.model.UserPartial;
+import com.darek.giza.userservice.model.user.User;
+import com.darek.giza.userservice.model.user.dto.UserRequest;
 import com.darek.giza.userservice.service.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.discovery.EurekaClient;
@@ -110,9 +110,9 @@ class UserControllerTest {
     public void testUpdate() throws Exception {
         String id = UUID.randomUUID().toString();
         User user = getUser(id, EMAIL);
-        UserPartial userPartial = UserPartial.builder().firstName(FIRST_NAME).firstName(LAST_NAME).build();
-        when(userService.updateById(id, userPartial)).thenReturn(user);
-        String req = objectMapper.writeValueAsString(userPartial);
+        UserRequest userRequest = UserRequest.builder().firstName(FIRST_NAME).firstName(LAST_NAME).build();
+        when(userService.updateById(id, userRequest)).thenReturn(user);
+        String req = objectMapper.writeValueAsString(userRequest);
 
         mockMvc.perform(put(URL_USER_BY_ID, id)
             .content(req)
@@ -120,7 +120,7 @@ class UserControllerTest {
             .andDo(print())
             .andExpect(status().isOk())
             .andReturn();
-        verify(userService, times(1)).updateById(id, userPartial);
+        verify(userService, times(1)).updateById(id, userRequest);
     }
 
     @Test

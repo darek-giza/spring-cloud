@@ -1,7 +1,7 @@
 package com.darek.giza.userservice.repository;
 
 import com.darek.giza.userservice.model.AppException;
-import com.darek.giza.userservice.model.User;
+import com.darek.giza.userservice.model.user.User;
 
 import java.util.List;
 import java.util.Optional;

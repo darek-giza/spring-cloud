@@ -1,7 +1,7 @@
 package com.darek.giza.userservice.service;
 
-import com.darek.giza.userservice.model.User;
-import com.darek.giza.userservice.model.UserPartial;
+import com.darek.giza.userservice.model.user.User;
+import com.darek.giza.userservice.model.user.dto.UserRequest;
 import com.darek.giza.userservice.repository.UserRepositoryImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -81,9 +81,9 @@ class UserServiceImplTest {
         User user = getUser(id, EMAIL);
         when(userRepository.takById(id)).thenReturn(user);
         when(userRepository.update(user)).thenReturn(user);
-        UserPartial userPartial = UserPartial.builder().firstName(FIRST_NAME).lastName(LAST_NAME).build();
+        UserRequest userRequest = UserRequest.builder().firstName(FIRST_NAME).lastName(LAST_NAME).build();
 
-        User updatedUser = userService.updateById(id, userPartial);
+        User updatedUser = userService.updateById(id, userRequest);
 
         verify(userRepository, times(1)).takById(id);
         verify(userRepository, times(1)).update(user);

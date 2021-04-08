@@ -1,4 +1,4 @@
-package com.darek.giza.userservice.model;
+package com.darek.giza.userservice.model.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class UserPartial {
+public class UserRequest {
 
     @NotBlank(message = "User first name is empty or null")
     @Indexed(name = "app_user_first_name")

@@ -1,7 +1,7 @@
 package com.darek.giza.userservice.service;
 
-import com.darek.giza.userservice.model.User;
-import com.darek.giza.userservice.model.UserPartial;
+import com.darek.giza.userservice.model.user.User;
+import com.darek.giza.userservice.model.user.dto.UserRequest;
 import com.darek.giza.userservice.repository.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateById(String id, UserPartial userPartial) {
+    public User updateById(String id, UserRequest userRequest) {
         User user = userRepository.takById(id);
-        user.setFirstName(userPartial.getFirstName());
-        user.setLastName(userPartial.getLastName());
+        user.setFirstName(userRequest.getFirstName());
+        user.setLastName(userRequest.getLastName());
         return userRepository.update(user);
     }
 

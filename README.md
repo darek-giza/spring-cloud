@@ -22,7 +22,9 @@ All microservices should start up in a few minutes.
 
 Eureka server should start on http://localhost:8761/ - here you can check if all services are running correctly.
 
-To create a new user you should make a request to this enpoint:
+To add a new user you should make a POST request to the endpoint <br>
+(with the correct ipAddr - check it in eureka server) <br>
+e.g. <br>
 http://172.20.0.3:8085/user
 
 with this Request body:

@@ -1,6 +1,6 @@
 package com.darek.giza.userservice.repository;
 
-import com.darek.giza.userservice.model.User;
+import com.darek.giza.userservice.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;

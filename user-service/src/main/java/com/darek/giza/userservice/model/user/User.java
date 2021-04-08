@@ -1,4 +1,4 @@
-package com.darek.giza.userservice.model;
+package com.darek.giza.userservice.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

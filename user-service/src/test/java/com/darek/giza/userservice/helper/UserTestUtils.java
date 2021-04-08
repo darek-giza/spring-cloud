@@ -1,6 +1,6 @@
 package com.darek.giza.userservice.helper;
 
-import com.darek.giza.userservice.model.User;
+import com.darek.giza.userservice.model.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
